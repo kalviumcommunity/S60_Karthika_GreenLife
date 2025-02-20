@@ -16,7 +16,6 @@ const transportMail = nodemailer.createTransport({
 
 MailRouter.post("/send-mail", async (req, res) => {
     const { mail, cartDetails, totalCost } = req.body;
-    console.log("Request received at /cart/send-mail", req.body);
     if (!mail || !cartDetails || totalCost == null) {
         return res.status(400).json({ error: "Mail, cartDetails, and totalCost are required" });
     }
@@ -44,7 +43,6 @@ MailRouter.post("/send-mail", async (req, res) => {
         await transportMail.sendMail(emailDetails);
         res.status(200).json({ message: "Email sent successfully" });
     } catch (error) {
-        console.error("Error in sending email:", error);
         res.status(500).json({ error: "Failed to send email" });
     }
 });
@@ -82,7 +80,6 @@ MailRouter.post("/single/send-mail", async (req, res) => {
         await transportMail.sendMail(emailDetails);
         res.status(200).json({ message: "Email sent successfully" });
     } catch (error) {
-        console.error("Error in sending email:", error);
         res.status(500).json({ error: "Failed to send email" });
     }
 });

@@ -1,11 +1,8 @@
 const jwt=require("jsonwebtoken")
 
 function Authentication(request,response,next){
-    // console.log("request headers",request.headers)
 const Safetoken=request.header('x-auth-token');
-// console.log("SafeToken",Safetoken)
 if(!Safetoken){
-    // console.log("There is no token")
     return response.status(401).json({note : 'Not authorized'})
 }
 try{

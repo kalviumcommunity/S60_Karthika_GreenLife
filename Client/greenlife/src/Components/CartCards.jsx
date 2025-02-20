@@ -26,7 +26,6 @@ function CartCards(props){
                 setdata(respond.data.plant)
             }catch(error){
                 console.log("cartcards component error:",error)
-                console.log(plantsid,"plantid from cartcard component")
             }
         }
         Getdata()

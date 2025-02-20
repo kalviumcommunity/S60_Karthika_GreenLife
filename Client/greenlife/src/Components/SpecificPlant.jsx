@@ -12,7 +12,6 @@ const[data,setdata]=useState(null);
 const[Plantdata,setplantsdata]=useState([]);
 const[quantity,setquantity]=useState(1);
 const[userid,setid]=useState("");
-const[FilteredData,setFilteredData]=useState([]);
 const[PlantCost,setcost]=useState(0);
 const nextPage=useNavigate();
 
@@ -29,7 +28,6 @@ useEffect(()=>{
                      'Content-Type': 'application/json'
                 }
             })
-            // console.log(respond.data)
             setdata(respond.data.plant)
             setcost(respond.data.plant.PlantCost)
         }catch(error){
@@ -49,7 +47,6 @@ try{
              'Content-Type': 'application/json'
         }
     })
-    console.log("added successfully",addData)
     nextPage(`/buySpecificPlant/${userid}`)
 }catch(err){
     console.log(err,"buynow err")
@@ -66,9 +63,6 @@ useEffect(
                 setid(userId)
             }else{
                 console.log("Invalid token exists in localstorage")
-                console.log(decodedvalue)
-                console.log(decodedvalue.NewUser)
-                console.log(decodedvalue.NewUser.id)
             }
             }catch(error){
                 console.log("jwt token error in frontend:",error)
@@ -107,7 +101,6 @@ const AddtoCart=async (event)=>{
          'Content-Type': 'application/json'
     }
     })
-    console.log("plants added to garden successfully",postcart.data)
     toast.success("Plant added to garden")
    }
 }catch(err){

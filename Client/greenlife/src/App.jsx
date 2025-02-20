@@ -8,7 +8,6 @@ import Experience from "./Components/Experience";
 import Order from "./Components/Order";
 import BuySpecificPlant from './Components/BuySpecific';
 import NotAuthenticated from './Components/NotAuthenticated';
-import { ContextProvider } from './Context Provider/CreateContext';
 import BuyNow from './Components/BuyNow';
 import ViewGarden from './Components/ViewGarden';
 import "slick-carousel/slick/slick.css";
@@ -18,7 +17,6 @@ import About from './Components/About';
 function App() {
 
   return (
-    <ContextProvider>
     <Routes>
     <Route path='/login' element={<Login/>}></Route>
     <Route path='/' element={<Main/>}></Route>
@@ -32,7 +30,6 @@ function App() {
     <Route path='/about' element={<About/>}></Route>
     <Route path='/NotAuthenticated' element={<NotAuthenticated/>}></Route>
   </Routes>
-  </ContextProvider>
   )
 }
 

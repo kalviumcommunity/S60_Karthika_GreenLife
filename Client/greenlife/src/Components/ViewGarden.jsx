@@ -2,7 +2,6 @@ import axios from "axios";
 import Navbar from "./Navbar";
 import {useState,useEffect} from "react";
 import CartCards from "./CartCards";
-import { useStoredState } from "../Context Provider/CreateContext";
 import { useNavigate, useParams, Link } from "react-router-dom";
 
 
@@ -10,7 +9,6 @@ function ViewGarden(){
 
     const {next}=useNavigate()
     const {id}=useParams()
-    const {setlength}=useStoredState();
     const[jwtToken,settoken]=useState("")
     const[cart,setcart]=useState(null)
 
@@ -36,7 +34,6 @@ function ViewGarden(){
                 }
             })
             setcart(cartlist.data.plants)
-            setlength(cartlist.data.plants.length)
         }catch(error){
            console.log("cart get error:",error)
         }
@@ -44,7 +41,6 @@ function ViewGarden(){
             getcartitems()
         }
     },[id,jwtToken])
-    console.log(cart)
 
     const deleteRequest=(plantid)=>{
         try{
