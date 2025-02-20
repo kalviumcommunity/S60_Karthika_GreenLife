@@ -25,7 +25,6 @@ function Signup() {
       setDisplayGoogleSignIn(true);
       setUser(result.user);
     } catch (err) {
-      console.error("Google Sign-In error:", err);
       toast.error("Google Sign-In failed");
     }
   };

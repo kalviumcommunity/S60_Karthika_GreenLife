@@ -2,7 +2,6 @@ import Navbar from "./Navbar";
 import {jwtDecode} from "jwt-decode";
 import { useState,useEffect } from "react";
 import axios from "axios";
-import { useStoredState } from "../Context Provider/CreateContext";
 import { Link,useNavigate } from "react-router-dom";
 
 
@@ -10,8 +9,8 @@ function Order(){
     const[opt,selectedopt]=useState("All Plants");
     const[name,setname]=useState(""||"User");
     const[PlantsData,setplantsdata]=useState([]);
+    const[length,setlength]=useState(0);
     const[id,setid]=useState("");
-    const{length}=useStoredState();
     const Nextpage=useNavigate();
 
     const jwt=localStorage.getItem("token")
@@ -26,18 +25,14 @@ function Order(){
                     setid(userId)
                 }else{
                     console.log("Invalid token exists in localstorage")
-                    console.log(decodedvalue)
-                    console.log(decodedvalue.NewUser)
-                    console.log(decodedvalue.NewUser.id)
                 }
                 }catch(error){
                     console.log("jwt token error in frontend:",error)
                 }
             }else{
-                console.log("There is nothing in localstorage")
+                console.log("There is no token in localstorage")
             }
         },[])
-        // console.log(id,"UserId from order page")
 
    const SpecificUser=async(UserId)=>{
 try{
@@ -66,9 +61,24 @@ setname(responded.data.username)
         data()
     },[])
 
-    // const getselectedopt=(event)=>{
-    //      selectedopt(event.target.value);
-    // }
+    useEffect(()=>{
+        if(jwt){
+            const getcartlength=async ()=>{
+                       try{
+            const cartlist= await axios.get(`http://localhost:3000/cart/get/${id}`,{
+                headers : {
+                    'x-auth-token': jwt,
+                     'Content-Type': 'application/json'
+                }
+            })
+            setlength(cartlist.data.plants.length)
+        }catch(error){
+           console.log("cart get error:",error)
+        }
+            }
+            getcartlength()
+        }
+    },[id,jwt])
 
 
     function GiveRatings(x){

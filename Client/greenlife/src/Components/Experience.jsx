@@ -46,7 +46,6 @@ const UpdateRequest = async () => {
     try {
         let image = updatefile;
 
-        // Upload new file to Cloudinary if the image has changed
         if (updatefile && updatefile !== userneedupdate.image) {
             const createdData = new FormData();
             createdData.append("file", updatefile);
@@ -59,7 +58,6 @@ const UpdateRequest = async () => {
             image = generatefilelink.data.secure_url;
         }
 
-        // Make the PUT request with correct structure
         const updatedData = await axios.put(
             `http://localhost:3000/updateExp/${id}`,
             { experience: updateExp, image },
@@ -73,7 +71,6 @@ const UpdateRequest = async () => {
 
         const updatedExp = updatedData.data;
 
-        // Update the local state
         setusers(
             users.map((user) =>
                 user._id === id
@@ -115,7 +112,6 @@ const postUrExp = async (event) => {
             );
             image = fileupload.data.secure_url;
         }
-        console.log(image);
         const newdata = await axios.post(
             "http://localhost:3000/postexp",
             { experience, image },

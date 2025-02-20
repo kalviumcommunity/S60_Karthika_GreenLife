@@ -55,7 +55,6 @@ const HandleGoogleSignin= async()=>{
     try{
         const GoogleProvider=await new GoogleAuthProvider()
         const details=await signInWithPopup(auth,GoogleProvider)
-        console.log(details.user)
         setdisplay(true)
         setuser(details.user)
     }catch(err){

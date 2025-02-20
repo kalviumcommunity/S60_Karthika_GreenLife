@@ -70,7 +70,6 @@ function BuyNow() {
             setClick(true);
             toast.success("Payment successful and email sent!");
         } catch (error) {
-            console.error("Error sending email:", error);
             toast.error("Failed to send email or process payment.");
         }
     };

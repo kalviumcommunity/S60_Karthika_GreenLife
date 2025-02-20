@@ -35,7 +35,6 @@ function BuySpecificPlant(){
             setquantity(list.data.quantity)
         }catch(error){
            console.log("buy specific plant error:",error)
-           console.log(id,"id")
         }
             }
             getcartitems()
@@ -93,13 +92,10 @@ const SendMail = async () => {
                 "Content-Type": "application/json",
             },
         });
-
-            console.log("Email sent successfully:", result.data);
             setclick(true);
             toast.success("Payment successful and email sent!");
     }
         catch(error){
-            console.error("Error sending email:", error);
             toast.error("Failed to send email or process payment.");
         };
 };
